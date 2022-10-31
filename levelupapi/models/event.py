@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 class Event(models.Model):
 
-    organizer = models.ForeignKey("Gamer", on_delete=models.CASCADE, related_name='')
-    game = models.ForeignKey("", on_delete=models.CASCADE, related_name='')
-    description = models.CharField(max_length=50)
+    organizer = models.ForeignKey("Gamer", on_delete=models.CASCADE, related_name='host')
+    game = models.ForeignKey("Game", on_delete=models.CASCADE)
+    description = models.CharField(max_length=500)
     date = models.DateField(null=True, blank=True, auto_now=False, auto_now_add=False)
-    time = 
+    time = models.TimeField(null=True, blank=True, auto_now=False, auto_now_add=False)
