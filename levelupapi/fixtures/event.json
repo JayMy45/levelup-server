@@ -1,0 +1,11 @@
+[
+    {
+        "model": "levelupapi.event",
+        "pk": 1,
+        "fields": {
+            "organizer": 1,
+            "game": 3,
+            "description": "Meet online at 0400"
+        }
+    }
+]
