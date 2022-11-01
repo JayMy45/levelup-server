@@ -1,0 +1,14 @@
+[
+    {
+        "model": "levelupapi.game",
+        "pk": 1,
+        "fields": {
+            "gamer": 1,
+            "title": "The Purpose",
+            "maker": "BigGame",
+            "number_of_players": 0,
+            "skill_level": 0,
+            "game_type": 1
+        }
+    }
+]
