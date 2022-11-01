@@ -27,9 +27,19 @@ class EventView(ViewSet):
             Response -- JSON serialized list of event types
         """
 
-        event_types = Event.objects.all()
-        serializer = EventSerializer(event_types, many=True)
-        return Response(serializer.data)
+        # set event_type equal to empty list 
+        events = []
+
+        # if there is a query string parameter 'game' then filter ...
+        if "game" in request.query_params:
+            events = Event.objects.filter(game__id=request.query_params['game'])
+
+        else:
+            events = Event.objects.all()
+
+        serialized = EventSerializer(events, many=True)
+        return Response(serialized.data, status=status.HTTP_200_OK)
+
 
 class EventSerializer(serializers.ModelSerializer):
     """JSON serializer for game types"""

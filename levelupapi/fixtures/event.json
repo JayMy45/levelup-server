@@ -4,17 +4,26 @@
         "pk": 1,
         "fields": {
             "organizer": 1,
-            "game": 3,
+            "game": 1,
             "description": "Meet online at 0400"
         }
     },
     {
         "model": "levelupapi.event",
-        "pk": 1,
+        "pk": 2,
         "fields": {
             "organizer": 1,
-            "game": 1,
+            "game": 2,
             "description": "Board with playing online games"
+        }
+    },
+    {
+        "model": "levelupapi.event",
+        "pk": 3,
+        "fields": {
+            "organizer": 1,
+            "game": 3,
+            "description": "MMO or MMA be there or be octagon"
         }
     }
 ]
