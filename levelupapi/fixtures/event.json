@@ -7,5 +7,14 @@
             "game": 3,
             "description": "Meet online at 0400"
         }
+    },
+    {
+        "model": "levelupapi.event",
+        "pk": 1,
+        "fields": {
+            "organizer": 1,
+            "game": 1,
+            "description": "Board with playing online games"
+        }
     }
 ]
