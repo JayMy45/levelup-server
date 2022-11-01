@@ -17,7 +17,7 @@ class EventView(ViewSet):
             Response -- JSON serialized game type
         """
         event_type = Event.objects.get(pk=pk)
-        serialized = Event.Serializer(event_type, context={'request': request})
+        serialized = EventSerializer(event_type, context={'request': request})
         return Response(serialized.data, status=status.HTTP_200_OK)
 
     def list(self, request):
@@ -28,12 +28,12 @@ class EventView(ViewSet):
         """
 
         event_types = Event.objects.all()
-        serializer = Event.Serializer(event_types, many=True)
+        serializer = EventSerializer(event_types, many=True)
         return Response(serializer.data)
 
-class Event.Serializer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     """JSON serializer for game types"""
 
     class Meta:
-        model = EventType
-        fields = ('id', 'label',)
+        model = Event
+        fields = ('id', 'organizer', 'game', 'description',)
