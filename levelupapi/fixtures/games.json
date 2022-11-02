@@ -6,8 +6,8 @@
             "gamer": 1,
             "title": "The Purpose",
             "maker": "BigGame",
-            "number_of_players": 0,
-            "skill_level": 0,
+            "number_of_players": 8,
+            "skill_level": 5,
             "game_type": 1
         }
     },
@@ -19,7 +19,7 @@
             "title": "Monopoly",
             "maker": "Elizabeth Magie",
             "number_of_players": 8,
-            "skill_level": 0,
+            "skill_level": 4,
             "game_type": 1
         }
     },
@@ -31,7 +31,7 @@
             "title": "Grand Theft Auto",
             "maker": "Rockstar Games",
             "number_of_players": 8,
-            "skill_level": 0,
+            "skill_level": 3,
             "game_type": 3
         }
     },
@@ -43,7 +43,7 @@
             "title": "Murder Mystery",
             "maker": "CatchMe",
             "number_of_players": 20,
-            "skill_level": 0,
+            "skill_level": 5,
             "game_type": 2
         }
     }
