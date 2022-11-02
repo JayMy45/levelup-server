@@ -3,8 +3,8 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from levelupapi.models import Event
-from levelupapi.models.gamer import Gamer
+from levelupapi.models import Event, Game, Gamer
+
 
 
 
@@ -40,6 +40,27 @@ class EventView(ViewSet):
 
         serialized = EventSerializer(events, many=True)
         return Response(serialized.data, status=status.HTTP_200_OK)
+
+    def create(self, request):
+        """Handle POST operations
+
+        Returns
+            Response -- JSON serialized game instance
+        """
+        organizer = Gamer.objects.get(user=request.auth.user)
+        game = Game.objects.get(pk=request.data["game"])
+       
+        event = Event.objects.create(
+            game=game,
+            description=request.data["description"],
+            date=request.data["date"],
+            time=request.data["time"],
+            organizer=organizer,
+        )
+
+        serializer = EventSerializer(event)
+        return Response(serializer.data)
+
 
 class EventOrganizerSerializer(serializers.ModelSerializer):
     class Meta:
