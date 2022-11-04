@@ -33,7 +33,7 @@ class EventView(ViewSet):
 
         # if there is a query string parameter 'game' then filter ...
         if "game" in request.query_params:
-            events = Event.objects.filter(game__id=request.query_params['game'])
+             events = Event.objects.filter(game__id=request.query_params['game'])
 
         else:
             events = Event.objects.all()
@@ -60,7 +60,30 @@ class EventView(ViewSet):
 
         serializer = EventSerializer(event)
         return Response(serializer.data)
+    
+    def update(self, request, pk):
+        """Handle PUT requests for a game
 
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+
+        event = Event.objects.get(pk=pk)
+        event.description = request.data["description"]
+        event.date = request.data["date"]
+        event.time = request.data["time"]
+
+        game = Game.objects.get(pk=request.data["game"])
+        event.game = game
+        event.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)  
+
+    def destroy(self, request, pk):
+            event = Event.objects.get(pk=pk)
+            event.delete()
+            return Response(None, status=status.HTTP_204_NO_CONTENT)
+            
 
 class EventOrganizerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -74,6 +97,4 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id', 'organizer', 'game', 'description','organizer',)
-
-        depth = 1
+        fields = ('id', 'organizer', 'game', 'description','organizer', 'date', 'time', )
