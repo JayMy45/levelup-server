@@ -58,10 +58,16 @@ class EventView(ViewSet):
 
         # if there is a query string parameter 'game' then filter ...
         if "game" in request.query_params:
-             events = Event.objects.filter(game__id=request.query_params['game'])
+            events = Event.objects.filter(game__id=request.query_params['game'])
 
         else:
             events = Event.objects.all()
+
+        # Set the `joined` property on every event
+        for event in events:
+            gamer = Gamer.objects.get(user=request.auth.user)
+            # Check to see if the gamer is in the attendees list on the event
+            event.joined = gamer in event.attendees.all()
 
         serialized = EventSerializer(events, many=True)
         return Response(serialized.data, status=status.HTTP_200_OK)
@@ -122,4 +128,4 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id', 'organizer', 'game', 'description','organizer', 'date', 'time', 'attendees' )
+        fields = ('id', 'organizer', 'game', 'description','organizer', 'date', 'time', 'attendees', 'joined', )
