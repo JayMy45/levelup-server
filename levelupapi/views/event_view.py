@@ -35,7 +35,6 @@ class EventView(ViewSet):
         return Response({'message':'Gamer has left event'}, status=status.HTTP_204_NO_CONTENT)
     
 
-
     def retrieve(self, request, pk):
         """Handle GET requests for single game type
         
