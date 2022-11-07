@@ -63,6 +63,11 @@ class EventView(ViewSet):
         else:
             events = Event.objects.all()
 
+        # Set the `joined` property on every event
+        for event in events:
+            # Check to see if the gamer is in the attendees list on the event
+            event.joined = gamer in event.attendees.all()
+
         serialized = EventSerializer(events, many=True)
         return Response(serialized.data, status=status.HTTP_200_OK)
 
