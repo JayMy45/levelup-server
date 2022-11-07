@@ -20,6 +20,19 @@ class EventView(ViewSet):
         event = Event.objects.get(pk=pk)
         event.attendees.add(gamer)
         return Response({'message': 'Gamer added'}, status=status.HTTP_201_CREATED)
+
+#Leave Method
+# action decorator accepts delete request (methods=['delete]) and a detail route (detail=True)
+    @action(methods=['delete'], detail=True)
+    def leave(self, request, pk):
+        """DELETE request for a user to leave an event"""
+#gets Gamer and Event objects from request
+        gamer = Gamer.objects.get(user=request.auth.user)
+        event = Event.objects.get(pk=pk)
+        #removes gamer from join table
+        event.attendees.remove(gamer)
+        # returns 204 status and message 
+        return Response({'message':'Gamer has left event'}, status=status.HTTP_204_NO_CONTENT)
     
 
 
