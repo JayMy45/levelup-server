@@ -7,7 +7,7 @@ class Gamer(models.Model):
 
     user =  models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=50)
-    events = models.ManyToManyField('Event', blank=True, through='GamerEvent')
+    # events = models.ManyToManyField('Event', blank=True, through='GamerEvent')
 
     @property
     def full_name(self):
